@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../public/style.css">
 </head>
 <body>
-    <form class="form_main" action="">
+    <form class="form_main" onsubmit="signup(event)">
         <p class="heading">Signup</p>
         <div class="inputContainer">
         <input placeholder="Name" id="name" class="inputField" type="text" required>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="inputContainer">
-        <input placeholder="Mobile No" id="mob" class="inputField" type="tel" required>
+        <input placeholder="Phone No" id="phone" class="inputField" type="number" required>
         </div>
         
     <div class="inputContainer">
@@ -32,6 +32,8 @@
             <a href="#">Login</a>
         </div>
     </form>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="signup.js"></script>
+
 </body>
 </html>
