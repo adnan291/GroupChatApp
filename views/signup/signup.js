@@ -21,6 +21,11 @@ async function signup(event) {
         //if user not existed then only creat new user
         // console.log("succesfully created new user");
         alert("User registered successfully");
+
+        event.target.name.value = '';
+        event.target.email.value = '';
+        event.target.phone.value= '';
+        event.target.password.value = '';
       } else {
         alert("Failed to Signup , account is already exist");
         // throw new Error("failed to Signup , account is already exist");
