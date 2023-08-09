@@ -3,12 +3,17 @@ const cors = require('cors');
 const bodyparser = require('body-parser');
 const path = require('path');
 const dotenv = require('dotenv');
-
 dotenv.config;
 
 const app = express();
 
+const User = require('./models/users');
+const Message = require('./models/messages');
+
 const userRoutes = require('./routes/user');
+const messageRoutes = require('./routes/message');
+
+
 
 app.use(bodyparser.json({extended: false}));
 app.use(cors({
@@ -19,9 +24,11 @@ app.use(cors({
 
 const sequelize = require('./util/database');
 
-const User = require('./models/users');
-
 app.use('/user', userRoutes);
+app.use('/message', messageRoutes);
+
+User.hasMany(Message);
+Message.belongsTo(User);
 
 app.use('/', (req, res, next) => {
     // console.log(req.url);
@@ -29,6 +36,7 @@ app.use('/', (req, res, next) => {
 });
 
 sequelize.sync().then((result) => {
+// sequelize.sync({force: true}).then((result) => {
     app.listen(3000);
 }).catch((err) => {
     console.log(err);
