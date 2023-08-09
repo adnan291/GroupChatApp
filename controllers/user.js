@@ -3,8 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 
-function generateAccessToken(name, email, phone) {
-  return jwt.sign({name: name, email: email, phone: phone}, process.env.TOKEN_SECRET);
+function generateAccessToken(id, name, email, phone) {
+  return jwt.sign({userId: id, name: name, email: email, phone: phone}, process.env.TOKEN_SECRET);
 }
 
 exports.signupUser = async (req, res, next) => {
@@ -50,7 +50,7 @@ if(user.length != 0){
   bcrypt.compare(password, user[0].password, (err, response) => {
 
     if(response){
-      res.status(200).json({message : "User logged in successfull" , token: generateAccessToken(user[0].name, user[0].email, user[0].phone) });
+      res.status(200).json({message : "User logged in successfull" , token: generateAccessToken(user[0].id, user[0].name, user[0].email, user[0].phone) });
       
     }
     else if(!err) {
