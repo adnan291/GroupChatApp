@@ -12,6 +12,8 @@ async function login(event){
      const res = await axios.post(`http://localhost:3000/user/login`, loginDetails);
      if(res.status === 200){
         alert('User logged in succcessfully');
+        localStorage.setItem("token", res.data.token);
+        (window.location.href="#"); 
      }
      
     }
