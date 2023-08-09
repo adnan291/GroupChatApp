@@ -13,7 +13,7 @@ async function signup(event) {
     // console.log(signupDetails);
     try {
       const res = await axios.post(
-        `http://localhost:3000/user/postUser`,
+        `http://localhost:3000/user/signup`,
         signupDetails
       );
   
