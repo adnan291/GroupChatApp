@@ -7,5 +7,6 @@ const messageController = require('../controllers/message');
 const router = express.Router();
 
 router.post('/postmessage', Authorization.authenticate, messageController.postMessage);
+router.get('/getmessages', Authorization.authenticate, messageController.getMessages);
 
 module.exports = router;

@@ -24,3 +24,25 @@ catch(err){
     console.log(err);
 }
 }
+
+window.addEventListener('DOMContentLoaded', async () => {
+
+    try {
+        const response = await axios.get(`http://localhost:3000/message/getmessages`,
+         {headers: {'Authorization': token}});
+
+        for (let i = 0; i < response.data.length; i++) {
+            const element = response.data[i];
+            showMsgOnScreen(element);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
+});
+
+async function showMsgOnScreen(data) {
+    const parentNode = document.getElementById("chat-message");
+    const childHTML = `<div class="chat-message me"> <p class="message-text">${data.message}</p></div>`; // if u are using above for loop then use i insted of data.message
+    parentNode.innerHTML += childHTML;
+}

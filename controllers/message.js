@@ -18,3 +18,17 @@ exports.postMessage = async (req, res, next) => {
         console.log(err);
     }
 }
+
+exports.getMessages = async (req, res, next) => {
+
+
+    try {
+
+   const messages = await  Message.findAll();
+   res.json(messages)
+
+    }
+     catch(err) {
+        console.log(err);
+    }
+}
