@@ -25,8 +25,15 @@ catch(err){
 }
 }
 
-window.addEventListener('DOMContentLoaded', async () => {
+window.addEventListener('DOMContentLoaded', getMessages);
 
+async function showMsgOnScreen(data) {
+    const parentNode = document.getElementById("chat-message");
+    const childHTML = `<div class="chat-message me"> <p class="message-text">${data.message}</p></div>`; // if u are using above for loop then use i insted of data.message
+    parentNode.innerHTML += childHTML;
+}
+
+async function getMessages() {
     try {
         const response = await axios.get(`http://localhost:3000/message/getmessages`,
          {headers: {'Authorization': token}});
@@ -38,11 +45,10 @@ window.addEventListener('DOMContentLoaded', async () => {
     } catch (err) {
         console.log(err);
     }
-
-});
-
-async function showMsgOnScreen(data) {
-    const parentNode = document.getElementById("chat-message");
-    const childHTML = `<div class="chat-message me"> <p class="message-text">${data.message}</p></div>`; // if u are using above for loop then use i insted of data.message
-    parentNode.innerHTML += childHTML;
 }
+
+setInterval(()=> {
+    const parentNode = document.getElementById("chat-message");
+    parentNode.innerHTML = " ";
+   getMessages();
+ }, 3000)
