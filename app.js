@@ -9,13 +9,15 @@ const app = express();
 
 const User = require('./models/users');
 const Message = require('./models/messages');
+// const Group = require('./models/groups');
+// const GroupUser = require('./models/groupUsers');
 
 const userRoutes = require('./routes/user');
 const messageRoutes = require('./routes/message');
 
 
 
-app.use(bodyparser.json({extended: false}));
+app.use(bodyparser.json({ extended: false }));
 app.use(cors({
     origin: "http://127.0.0.1:3000",
     // methods:["GET","POST"],
@@ -30,13 +32,19 @@ app.use('/message', messageRoutes);
 User.hasMany(Message);
 Message.belongsTo(User);
 
+// User.belongsToMany(Group, { through: GroupUser});
+// Group.belongsToMany(User, { through: GroupUser});
+
+// Message.belongsTo(Group);
+// Group.hasMany(Message);
+
 app.use('/', (req, res, next) => {
     // console.log(req.url);
     res.sendFile(path.join(__dirname, `views/${req.url}`));
 });
 
 sequelize.sync().then((result) => {
-// sequelize.sync({force: true}).then((result) => {
+    // sequelize.sync({force: true}).then((result) => {
     app.listen(3000);
 }).catch((err) => {
     console.log(err);

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../public/main.css">
+  <title>Create Group</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="section">
+      <h3>Create Group</h3>
+      <form method="POST" onsubmit="groupname(event)">
+        <div class="form-group">
+          <label for="gpname">Group Name:</label>
+          <input type="text" name="name" id="gpname" />
+        </div>
+        <button type="submit" id="cgp">Create Group</button>
+      </form>
+    </div>
+    
+    <div class="section">
+      <h3>Add user in group</h3>
+      <form>
+        <div class="form-group">
+          <label for="adduser">Enter user emailId:</label>
+          <input type="text" name="adduser" id="adduser" />
+        </div>
+        <div class="form-group">
+          <label>Access Type:</label>
+          <label for="makeadmin">Admin</label>
+          <input type="radio" name="makeadmin" id="makeadmin" value="on" />
+          <label for="makenormal">Normal User</label>
+          <input type="radio" name="makeadmin" id="makenormal" value="off" />
+        </div>
+        <div class="form-group">
+          <label for="groupid">Enter group ID:</label>
+          <input type="text" id="groupid" />
+        </div>
+        <button type="submit" id="adu">Add User</button>
+      </form>
+    </div>
+    <div class="section">
+      <h3>Remove user from group</h3>
+      <form>
+        <div class="form-group">
+          <label for="rmuser">Enter user email:</label>
+          <input type="text" name="rmuser" id="rmuser" />
+        </div>
+        <div class="form-group">
+          <label for="groupid">Enter group ID:</label>
+          <input type="text" id="gid" />
+        </div>
+        <button type="submit" id="rmu">Remove User</button>
+      </form>
+    </div>
+  </div>
+
+
+
+  <div class="group-list">
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+  <script src="group.js"></script>
+</body>
+
+</html>

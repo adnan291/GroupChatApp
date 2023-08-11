@@ -24,7 +24,7 @@ exports.getMessages = async (req, res, next) => {
 
 
     try {
-
+        console.log(req.query);
    const lastMsgId = req.query.id || 0;
 
    const messages = await  Message.findAll({
