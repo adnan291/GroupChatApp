@@ -17,7 +17,7 @@ async function createGroup(event) {
 
     try {
 
-        const res = await axios.post(`http://13.233.9.208:3000/group/creategroup`,
+        const res = await axios.post(`http://localhost:3000/group/creategroup`,
         grpname,
             {
                 headers: { Authorization: token }
@@ -45,7 +45,7 @@ async function addToGroup(userId, groupId, isAdmin) {
 
     try {
 
-        const res = await axios.post(`http://13.233.9.208:3000/group/addUser`,
+        const res = await axios.post(`http://localhost:3000/group/addUser`,
         addUser,
             {
                 headers: { Authorization: token }
@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', getGroups);
 
 async function getGroups(){
     try {
-        const res = await axios.get(`http://13.233.9.208:3000/group/getgroups`,
+        const res = await axios.get(`http://localhost:3000/group/getgroups`,
         {
             headers: { Authorization: token }
         });

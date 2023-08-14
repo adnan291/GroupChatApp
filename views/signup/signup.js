@@ -13,7 +13,7 @@ async function signup(event) {
     // console.log(signupDetails);
     try {
       const res = await axios.post(
-        `http://13.233.9.208:3000/user/signup`,
+        `http://localhost:3000/user/signup`,
         signupDetails
       );
   
