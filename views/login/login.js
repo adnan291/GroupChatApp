@@ -13,7 +13,7 @@ async function login(event){
      if(res.status === 200){
         alert('User logged in succcessfully');
         localStorage.setItem("token", res.data.token);
-        (window.location.href="../chatapp/chatapp.html"); 
+        (window.location.href="../group/group.html"); 
      }
      
     }

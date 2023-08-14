@@ -26,6 +26,8 @@ async function signup(event) {
         event.target.email.value = '';
         event.target.phone.value= '';
         event.target.password.value = '';
+        (window.location.href="../login/login.html"); 
+
       } else {
         alert("Failed to Signup , account is already exist");
         // throw new Error("failed to Signup , account is already exist");

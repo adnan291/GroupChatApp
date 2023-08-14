@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../public/group.css">
+  <title>Create Group</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="section">
+      <h3>Create Group</h3>
+      <form method="POST" onsubmit="createGroup(event)">
+        <div class="form-group">
+          <label for="grpname">Group Name:</label>
+          <input type="text" name="grpname" id="grpname" required/>
+        </div>
+        <button type="submit" id="cgp">Create Group</button>
+      </form>
+    </div>
+
+
+  <div class="group-list" id="group-list">
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+  <script src="group.js"></script>
+</body>
+
+</html>
