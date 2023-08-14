@@ -30,7 +30,7 @@ async function sendMessage(event) {
 
     try {
 
-        const res = await axios.post(`http://localhost:3000/message/postmessage`,
+        const res = await axios.post(`http://13.233.9.208:3000/message/postmessage`,
             msg,
             {
                 headers: { Authorization: token }
@@ -59,7 +59,7 @@ async function addToGroup(event) {
 
     try {
 
-        const res = await axios.post(`http://localhost:3000/group/addUser`,
+        const res = await axios.post(`http://13.233.9.208:3000/group/addUser`,
         userCreds,
             {
                 headers: { Authorization: token }
@@ -90,7 +90,7 @@ async function removeFromGroup(event) {
 
     try {
 
-        const res = await axios.post(`http://localhost:3000/group/removeUser`,
+        const res = await axios.post(`http://13.233.9.208:3000/group/removeUser`,
         userCreds,
             {
                 headers: { Authorization: token }
@@ -126,7 +126,7 @@ async function getMessages(groupId) {
     const messageArray = JSON.parse(localStorage.getItem("messages"));
     if (!messageArray) {
         try {
-            const response = await axios.get(`http://localhost:3000/message/getmessages?groupid=${groupId}`,
+            const response = await axios.get(`http://13.233.9.208:3000/message/getmessages?groupid=${groupId}`,
                 { headers: { 'Authorization': token } });
 
             const res = response.data.slice(response.data.length - 10, response.data.length);
@@ -167,7 +167,7 @@ async function allMsgs(groupId) {
 
         // console.log(lastMsgId)
 
-        const res = await axios.get(`http://localhost:3000/message/getmessages?groupid=${groupId}&id=${lastMsgId}`, { headers: { Authorization: token } });
+        const res = await axios.get(`http://13.233.9.208:3000/message/getmessages?groupid=${groupId}&id=${lastMsgId}`, { headers: { Authorization: token } });
         // console.log(res.data);
         const allMsgs = oldMsgArray.concat(res.data);
         // console.log(allMsgs);
