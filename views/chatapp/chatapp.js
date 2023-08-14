@@ -36,7 +36,7 @@ async function sendMessage(event) {
                 headers: { Authorization: token }
             });
 
-        console.log(res);
+        // console.log(res);
         event.target.message.value = '';
         allMsgs(groupId);
     }
@@ -144,7 +144,7 @@ async function getMessages(groupId) {
         }
     }
     else {
-        console.log(messageArray);
+        // console.log(messageArray);
         for (let i = 0; i < messageArray.length; i++) {
             const element = messageArray[i];
             showMsgOnScreen(element);
@@ -156,7 +156,7 @@ async function getMessages(groupId) {
 async function allMsgs(groupId) {
     try {
         const oldMsgArray = JSON.parse(localStorage.getItem("messages"));
-        console.log(oldMsgArray)
+        // console.log(oldMsgArray)
         let lastMsgId;
         if(oldMsgArray.length > 0){
 
@@ -168,9 +168,9 @@ async function allMsgs(groupId) {
         // console.log(lastMsgId)
 
         const res = await axios.get(`http://localhost:3000/message/getmessages?groupid=${groupId}&id=${lastMsgId}`, { headers: { Authorization: token } });
-        console.log(res.data);
+        // console.log(res.data);
         const allMsgs = oldMsgArray.concat(res.data);
-        console.log(allMsgs);
+        // console.log(allMsgs);
         if (allMsgs.length > 10) {
             const msgToSaveInLs = allMsgs.slice(allMsgs.length - 10, allMsgs.length);
             localStorage.setItem("messages", JSON.stringify(msgToSaveInLs));

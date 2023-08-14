@@ -5,6 +5,7 @@ localStorage.removeItem('isAdmin');
 localStorage.removeItem('group_name');
 localStorage.removeItem('messages');
 
+
 async function createGroup(event) {
     event.preventDefault();
 
@@ -66,7 +67,9 @@ async function getGroups(){
         {
             headers: { Authorization: token }
         });
-        console.log(res);
+        document.getElementById('user-id').innerHTML = res.data.message[0].userId;
+
+        // console.log(res);
         
             groupList.innerHTML = '';
             for (let i = 0; i < res.data.message.length; i++) {

@@ -14,10 +14,11 @@ exports.signupUser = async (req, res, next) => {
   const password = req.body.password;
 
   try {
-    const response = await User.findAll({ where: { email: email } });
+    const emailExisting = await User.findAll({ where: { email: email } });
+    const phoneExisting = await User.findAll({ where: { phone: phone } });
     // console.log(response);
 
-    if (response.length === 0) {
+    if (emailExisting.length === 0 && phoneExisting.length === 0) {
     bcrypt.hash(password, saltRounds, async(err,hash) => {
       await User.create({
         name: name,

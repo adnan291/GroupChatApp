@@ -76,7 +76,7 @@ exports.removeGroupUser =  async (req, res, next) => {
 exports.getGroups =  async (req, res, next) => {
 
     try {
-console.log(req.user);
+// console.log(req.user);
        const response = await GroupUser.findAll({
         
             where: { userId: req.user.id},
