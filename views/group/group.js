@@ -83,15 +83,17 @@ async function getGroups(){
 }
 
 async function showGroupOnScreen(data) {
-    const childHTML = `<div id="${data.groupId}"><button onclick="openGroupChat('${data.groupId}','${data.group.group_name}','${data.isAdmin}')">${data.group.group_name}</button></div>`; 
+
+    const childHTML = `<div id="${data.groupId}"><button onclick="openGroupChat('${data.groupId}','${data.group.group_name}','${data.isAdmin}','${data.userId}')">${data.group.group_name}</button></div>`; 
     groupList.innerHTML += childHTML;
   
 }
 
-async function openGroupChat(groupId, group ,isAdmin){
+async function openGroupChat(groupId, group ,isAdmin, userId){
 localStorage.setItem("groupId", groupId);
 localStorage.setItem("group_name", group);
 localStorage.setItem("isAdmin", isAdmin);
+localStorage.setItem("userId", userId);
 // localStorage.removeItem('messages');
 
 (window.location.href="../chatapp/chatapp.html"); 

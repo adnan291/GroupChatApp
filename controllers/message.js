@@ -2,7 +2,7 @@ const Message = require('../models/messages');
 const User = require('../models/users');
 const {Op} = require('sequelize');
 
-exports.postMessage = async (req, res, next) => {
+exports.postMessage = async (io, req, res, next) => {
     const message = req.body.message;
     const groupId = req.body.groupId;
 
@@ -12,8 +12,13 @@ exports.postMessage = async (req, res, next) => {
             message: message,
             groupId: groupId,
             userId: req.user.id,
-        })
-
+        });
+        // console.log("Response", req.user.name);
+        const toServer = {
+            message,
+         user: {name: req.user.name}
+        }
+        io.emit('new-message', toServer);
         res.status(201).json({ message: response });
 
     }

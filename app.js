@@ -2,8 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const bodyparser = require('body-parser');
 const path = require('path');
+const socketIo = require('socket.io');
 const dotenv = require('dotenv');
-dotenv.config;
+dotenv.config();
 
 const app = express();
 
@@ -16,7 +17,13 @@ const userRoutes = require('./routes/user');
 const messageRoutes = require('./routes/message');
 const groupRoutes = require('./routes/group');
 
+const port = process.env.PORT;
 
+const server = app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}/`);
+});
+
+const io = socketIo(server);
 
 app.use(bodyparser.json({ extended: false }));
 app.use(cors({
@@ -28,14 +35,14 @@ app.use(cors({
 const sequelize = require('./util/database');
 
 app.use('/user', userRoutes);
-app.use('/message', messageRoutes);
+app.use('/message', messageRoutes(io));
 app.use('/group', groupRoutes);
 
 User.hasMany(Message);
 Message.belongsTo(User);
 
 User.hasMany(Group);
-Group.belongsToMany(User, { through: GroupUser});
+Group.belongsToMany(User, { through: GroupUser });
 
 GroupUser.belongsTo(Group);
 
@@ -46,12 +53,13 @@ app.use('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, `views/${req.url}`));
 });
 
-sequelize.sync().then((result) => {
-    // sequelize.sync({force: true}).then((result) => {
-    app.listen(3000);
-}).catch((err) => {
-    console.log(err);
-});
+sequelize.sync()
+    // sequelize.sync({force: true})
+    .then((result) => {
+        console.log("Connected to database!!!");
+    }).catch((err) => {
+        console.log(err);
+    });
 
 app.use((req, res, next) => {
     res.status(404).send("<h1>Page Not Found</h1>");

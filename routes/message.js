@@ -6,7 +6,11 @@ const messageController = require('../controllers/message');
 
 const router = express.Router();
 
-router.post('/postmessage', Authorization.authenticate, messageController.postMessage);
-router.get('/getmessages', Authorization.authenticate, messageController.getMessages);
+module.exports = (io) => {
+    router.post('/postmessage', Authorization.authenticate, (req, res) =>
+        messageController.postMessage(io, req, res)
+    );
+    router.get('/getmessages', Authorization.authenticate, messageController.getMessages);
 
-module.exports = router;
+    return router;
+};

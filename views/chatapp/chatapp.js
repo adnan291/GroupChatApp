@@ -1,17 +1,20 @@
-
+const socket = io('http://localhost:3000');
 const token = localStorage.getItem('token');
 const groupId = localStorage.getItem('groupId');
 const group_name = localStorage.getItem('group_name');
+const Id = localStorage.getItem('userId');
 const Admin = JSON.parse(localStorage.getItem('isAdmin'));
 const addUser = document.getElementById('addUser');
 const removeUser = document.getElementById('removeUser');
 const parentNode = document.getElementById("chat-message");
 localStorage.removeItem('messages');
 
-
+socket.on('new-message', (message) => {
+    showMsgOnScreen(message);
+});
 
 if (Admin) {
-    // console.log("IsAdmin", Admin);
+
     document.getElementById('addbtn').style.display = 'block';
     document.getElementById('removebtn').style.display = 'block';
 }
@@ -112,17 +115,31 @@ async function removeFromGroup(event) {
         
     }
 }
+// window.onload = function() {
+//     document.getElementById("message").focus();
+// };
 
-window.addEventListener('DOMContentLoaded', getMessages(groupId));
+window.addEventListener('DOMContentLoaded', () => {
+    getMessages(groupId);
+});
+
+
 
 async function showMsgOnScreen(data) {
-    
-    const childHTML = `<div class="chat-message me"> <p class="user-name">${data.user.name}:</p> <p class="message-text">${data.message}</p></div>`; 
+
+    let childHTML;
+    if (data.userId == Id) {
+        childHTML = `<div class="chat-message me"> <p class="user-name">${data.user.name}:</p> <p class="message-text">${data.message}</p></div>`; 
+    } else {
+        childHTML = `<div class="chat-message other"> <p class="user-name">${data.user.name}:</p> <p class="message-text">${data.message}</p></div>`; 
+
+    }
     parentNode.innerHTML += childHTML;
+  
 }
 
 async function getMessages(groupId) {
-        parentNode.innerHTML = " ";
+        parentNode.innerHTML = "";
     const messageArray = JSON.parse(localStorage.getItem("messages"));
     if (!messageArray) {
         try {
@@ -199,8 +216,3 @@ document.getElementById('gobackbtn').addEventListener('click', () => {
     (window.location.href="../group/group.html"); 
 });
 
-
-// setInterval(()=> {
-
-//    getMessages(groupId);
-//  }, 3000);
