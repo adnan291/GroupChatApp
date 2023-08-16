@@ -20,12 +20,47 @@ if (Admin) {
 }
 
 document.getElementById('group-name').innerHTML = group_name;
+const fileInput = document.getElementById('fileInput');
+
+fileInput.addEventListener('change', sendMultimedia);
+
+async function sendMultimedia(event) {
+    const media = event.target.files[0];
+
+    const formData = {
+        media,
+        groupId,
+    };
+
+    if (media) {
+        // try {
+        //     console.log(formData);
+        //     const res = await axios.post(
+        //         'http://localhost:3000/message/postmedia',
+        //         formData,
+        //         {
+        //             headers: {
+        //                 Authorization: token,
+        //                 'Content-Type': 'multipart/form-data',
+        //             },
+        //         }
+        //     );
+
+        //     // console.log(res);
+        //     fileInput.value = ''; // Clear the file input
+        //     allMsgs(groupId);
+        // } catch (err) {
+        //     console.log(err);
+        // }
+        console.log(formData);
+    }
+}
+
 
 async function sendMessage(event) {
     event.preventDefault();
 
     const message = event.target.message.value;
-
     const msg = {
         message,
         groupId
@@ -122,6 +157,7 @@ async function removeFromGroup(event) {
 window.addEventListener('DOMContentLoaded', () => {
     getMessages(groupId);
 });
+
 
 
 

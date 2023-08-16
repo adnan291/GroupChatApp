@@ -60,8 +60,16 @@
 			
 		</div>
 
-		<form class="chat-form" onsubmit="sendMessage(event)">
+		<form class="chat-form" onsubmit="sendMessage(event)" enctype="multipart/form-data">
 			<input type="text" placeholder="Type your message here" id="message" required>
+			<input type="file" id="fileInput" accept="image/*, video/*" style="display: none;" onchange="sendMultimedia(event)">
+
+			<label for="fileInput" id="fileInputLabel">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M20.475 3.137h-2.625l-1.35-1.35c-.488-.488-1.344-.487-1.83.002l-1.2 1.199H8.53l-1.2-1.199c-.487-.489-1.344-.49-1.83-.002l-1.35 1.35H3.524c-.917 0-1.663.747-1.663 1.665v16.333c0 .917.746 1.664 1.663 1.664h16.95c.918 0 1.665-.747 1.665-1.664V4.802c0-.918-.747-1.665-1.665-1.665zm-8.315 14.33c-2.81 0-5.1-2.29-5.1-5.102 0-2.812 2.29-5.102 5.1-5.102 2.813 0 5.102 2.29 5.102 5.102 0 2.812-2.29 5.102-5.102 5.102zm6.398-8.937h-1.292c-.224 0-.425-.13-.521-.336l-.215-.546a1.18 1.18 0 0 0-.797-.706l-1.017-.406c-.06-.023-.124-.036-.185-.036h-1.913c-.064 0-.13.013-.19.038l-1.012.402a1.175 1.175 0 0 0-.797.702l-.217.551a.545.545 0 0 0-.516.337h-1.296a.842.842 0 0 0-.836.845v6.294a.842.842 0 0 0 .835.845h9.254a.842.842 0 0 0 .836-.845V9.565a.842.842 0 0 0-.836-.845z"/>
+				</svg>
+			</label>
+			
 			<button>Send</button>
 		</form>
 	</div>
