@@ -14,7 +14,6 @@ socket.on('new-message', (message) => {
 });
 
 if (Admin) {
-
     document.getElementById('addbtn').style.display = 'block';
     document.getElementById('removebtn').style.display = 'block';
 }
@@ -116,6 +115,9 @@ async function addToGroup(event) {
             alert('User not registered');
         }
     }
+    event.target.userId.value ='';
+    addUser.style.display = 'none';
+
 }
 async function removeFromGroup(event) {
     event.preventDefault();
@@ -149,17 +151,16 @@ async function removeFromGroup(event) {
         }
         
     }
+    event.target.rmuser.value ='';
+    removeUser.style.display = 'none';
 }
-// window.onload = function() {
-//     document.getElementById("message").focus();
-// };
+window.onload = function() {
+    document.getElementById("message").focus();
+};
 
 window.addEventListener('DOMContentLoaded', () => {
     getMessages(groupId);
 });
-
-
-
 
 async function showMsgOnScreen(data) {
 
@@ -171,7 +172,7 @@ async function showMsgOnScreen(data) {
 
     }
     parentNode.innerHTML += childHTML;
-  
+   
 }
 
 async function getMessages(groupId) {
@@ -181,10 +182,8 @@ async function getMessages(groupId) {
         try {
             const response = await axios.get(`http://localhost:3000/message/getmessages?groupid=${groupId}`,
                 { headers: { 'Authorization': token } });
-
             const res = response.data.slice(response.data.length - 10, response.data.length);
             const messages = JSON.stringify(res);
-            // console.log(messages);
             localStorage.setItem('messages', messages);
 
             for (let i = 0; i < response.data.length; i++) {
@@ -197,19 +196,20 @@ async function getMessages(groupId) {
         }
     }
     else {
-        // console.log(messageArray);
         for (let i = 0; i < messageArray.length; i++) {
             const element = messageArray[i];
             showMsgOnScreen(element);
 
         }
     }
+    const chatcontainer = document.getElementById('chat-form');
+    chatcontainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
 }
 
 async function allMsgs(groupId) {
     try {
         const oldMsgArray = JSON.parse(localStorage.getItem("messages"));
-        // console.log(oldMsgArray)
+
         let lastMsgId;
         if(oldMsgArray.length > 0){
 
@@ -218,12 +218,11 @@ async function allMsgs(groupId) {
             lastMsgId = 0;
         }
 
-        // console.log(lastMsgId)
 
         const res = await axios.get(`http://localhost:3000/message/getmessages?groupid=${groupId}&id=${lastMsgId}`, { headers: { Authorization: token } });
-        // console.log(res.data);
+
         const allMsgs = oldMsgArray.concat(res.data);
-        // console.log(allMsgs);
+
         if (allMsgs.length > 10) {
             const msgToSaveInLs = allMsgs.slice(allMsgs.length - 10, allMsgs.length);
             localStorage.setItem("messages", JSON.stringify(msgToSaveInLs));
@@ -249,6 +248,6 @@ document.getElementById('removebtn').addEventListener('click', () => {
 
 document.getElementById('gobackbtn').addEventListener('click', () => {
    
-    (window.location.href="../group/group.html"); 
+    (window.location.href="../dashboard/dashboard.html"); 
 });
 

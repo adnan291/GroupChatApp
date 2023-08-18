@@ -1,10 +1,21 @@
 const token = localStorage.getItem('token');
-const groupList = document.getElementById('group-list')
+const groupList = document.getElementById('group-list');
+const Id = localStorage.getItem('userId');
 localStorage.removeItem('groupId');
 localStorage.removeItem('isAdmin');
 localStorage.removeItem('group_name');
 localStorage.removeItem('messages');
+const logoutButton = document.getElementById('logout-btn');
+logoutButton.addEventListener('click', logout);
 
+function logout() {
+    const confirmLogout = confirm('Are you sure you want to logout?');
+    if (confirmLogout) {
+      localStorage.clear(); 
+      alert('User logged out successfully')
+      window.location.href = '../login/login.html'; 
+    }
+  }
 
 async function createGroup(event) {
     event.preventDefault();
@@ -67,11 +78,12 @@ async function getGroups(){
         {
             headers: { Authorization: token }
         });
-        document.getElementById('user-id').innerHTML = res.data.message[0].userId;
+        document.getElementById('user-id').innerHTML = Id;
 
         // console.log(res);
         
             groupList.innerHTML = '';
+            groupList.innerHTML =  '<h2>Groups<h2/>'
             for (let i = 0; i < res.data.message.length; i++) {
                 // console.log("printed");
                 const element = res.data.message[i];

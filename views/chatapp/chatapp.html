@@ -60,7 +60,7 @@
 			
 		</div>
 
-		<form class="chat-form" onsubmit="sendMessage(event)" enctype="multipart/form-data">
+		<form class="chat-form" id="chat-form" onsubmit="sendMessage(event)" enctype="multipart/form-data">
 			<input type="text" placeholder="Type your message here" id="message" required>
 			<input type="file" id="fileInput" accept="image/*, video/*" style="display: none;" onchange="sendMultimedia(event)">
 

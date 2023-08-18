@@ -46,7 +46,7 @@ exports.addGroupUser = async (req, res, next) => {
         res.status(201).json({ message: 'User added to the group.' });
 
     } catch (err) {
-        // User is not registered or other error
+
         res.status(400).json({ message: 'Error adding user to the group.' });
     }
 };
@@ -68,7 +68,7 @@ exports.removeGroupUser =  async (req, res, next) => {
     }
     }
      catch(err) {
-        // console.log(err);
+ 
         res.status(500).json({message: err});
     }
 }
@@ -76,13 +76,13 @@ exports.removeGroupUser =  async (req, res, next) => {
 exports.getGroups =  async (req, res, next) => {
 
     try {
-// console.log(req.user);
+
        const response = await GroupUser.findAll({
         
             where: { userId: req.user.id},
             include: [{ model: Group, attributes: ['group_name'] }],
         });
-    //  console.log(response);
+
         res.status(201).json({ message: response });
 
     }

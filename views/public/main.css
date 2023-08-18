@@ -180,9 +180,17 @@ button:hover {
     background-color: #0056b3;
 }
 
+
 #adminSection {
     margin-top: 140px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 20px 20px;
 }
+
 
 /* File input styling */
 #fileInputLabel {

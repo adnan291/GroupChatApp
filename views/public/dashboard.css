@@ -12,8 +12,11 @@ body {
 .header {
   background-color: #007bff;
   color: #fff;
-  text-align: center;
+  text-align: right; /* Align content to the right */
   padding: 10px;
+  display: flex; /* Use flexbox to align items */
+  justify-content: space-between; /* Space items evenly in the header */
+  align-items: center; /* Align items vertically in the center */
 }
 
 .header h1 {
@@ -65,7 +68,7 @@ input[type="text"]:focus {
   border-color: #007bff;
 }
 
-button {
+.container button {
   display: inline-block;
   padding: 12px 24px;
   border: none;
@@ -77,7 +80,7 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
+.container button:hover {
   background-color: #0056b3;
 }
 
@@ -105,10 +108,74 @@ button:hover {
   color: #fff;
 }
 
+.group-list button {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #007bff; /* Add border for a button-like appearance */
+  border-radius: 5px;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  width: 100%; /* Button takes the full width of its container */
+  text-align: left; /* Align button text to the left */
+}
+
+.group-list button:hover {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #0056b3; /* Border color change on hover */
+}
+
+.group-list h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
 @media (max-width: 768px) {
   .section {
     flex: 100%;
     margin: 0;
     margin-bottom: 20px;
   }
+}
+
+.lgBtn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(255, 65, 65);
+}
+
+/* plus sign */
+.lgsign {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lgsign svg {
+  width: 17px;
+}
+
+.lgsign svg path {
+  fill: white;
+}
+/* button click effect*/
+.lgBtn:active {
+  transform: translate(2px ,2px);
 }

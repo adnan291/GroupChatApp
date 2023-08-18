@@ -2,7 +2,6 @@ const Message = require('../models/messages');
 const MessageArchieved = require('../models/messagesArchieved');
 const User = require('../models/users');
 const S3services = require('../services/s3Services');
-const fs = require('fs');
 const {Op} = require('sequelize');
 const CronJob = require('cron').CronJob;
 
@@ -84,10 +83,11 @@ exports.getMessages = async (req, res, next) => {
 }
 
 const job = new CronJob(
-    '0 * * * *', 
+    '0 12 * * *', 
     async function() {
         try {
             const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000); 
+            console.log("One Day Ago", oneDayAgo);
             const oldMessages = await Message.findAll({
                 where: {
                     createdAt: { [Op.lt]: oneDayAgo },
@@ -115,4 +115,4 @@ const job = new CronJob(
     null,
     true,
     'America/Los_Angeles'
-);
+)

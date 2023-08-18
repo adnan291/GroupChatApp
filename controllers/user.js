@@ -51,7 +51,7 @@ if(user.length != 0){
   bcrypt.compare(password, user[0].password, (err, response) => {
 
     if(response){
-      res.status(200).json({message : "User logged in successfull" , token: generateAccessToken(user[0].id, user[0].name, user[0].email, user[0].phone) });
+      res.status(200).json({message : "User logged in successfull" , token: generateAccessToken(user[0].id, user[0].name, user[0].email, user[0].phone), userId: user[0].id });
       
     }
     else if(!err) {
